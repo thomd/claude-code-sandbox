@@ -1,4 +1,5 @@
-1. like claude-pod
+# Claude Code Sandbox
+
 1. Makefile for install, uninstall and update
 1. install executable in ~/.local/bin
 1. install repo in ~/.local/share/claude-sandbox
