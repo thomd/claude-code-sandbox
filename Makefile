@@ -6,6 +6,9 @@ ifeq ($(CLAUDE_CODE_VERSION),latest)
   BUILD_ARGS += --build-arg CACHEBUST=$(shell date +%s)
 endif
 
-.PHONY: install
+.PHONY: install uninstall
 install:
 	docker build $(BUILD_ARGS) -t $(IMAGE) .
+
+uninstall:
+	docker rmi $(IMAGE)
