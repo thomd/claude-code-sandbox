@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+BOLD=$'\e[1m'
+RED=$'\e[31m'
+RESET=$'\e[0m'
+[[ -t 1 ]] || {
+  BOLD=
+  RED=
+  RESET=
+}
+err() { printf '%s✗%s %s\n' "$RED" "$RESET" "$*" >&2; }
+die() {
+  err "$*"
+  exit 1
+}
+
+mkdir -p "$HOME/.claude-sandbox"
+[ -s "$HOME/.claude-sandbox/.claude.json" ] || printf '{}' >"$HOME/.claude-sandbox/.claude.json"
+chmod 700 "$HOME/.claude-sandbox"
+chmod 600 "$HOME/.claude-sandbox/.claude.json"
+
+DOCKER_FLAGS=("--rm")
+[ -t 0 ] && DOCKER_FLAGS+=("-i")
+[ -t 1 ] && DOCKER_FLAGS+=("-t")
+
+if [ -n "${PORTS:-}" ]; then
+  for port in $PORTS; do
+    if [[ ! "$port" =~ ^[0-9]+(:[0-9]+)?$ ]]; then
+      die "PORTS entry '$port' is invalid; expected 'PORT' or 'HOST:CONTAINER' (digits only)."
+    fi
+    IFS=':' read -ra _port_parts <<<"$port"
+    for _n in "${_port_parts[@]}"; do
+      if ((10#$_n < 1 || 10#$_n > 65535)); then
+        die "PORTS entry '$port' has '$_n' outside the 1-65535 range."
+      fi
+    done
+    if [[ "$port" == *":"* ]]; then
+      DOCKER_FLAGS+=("-p" "127.0.0.1:${port}")
+    else
+      DOCKER_FLAGS+=("-p" "127.0.0.1:${port}:${port}")
+    fi
+  done
+fi
+
+exec docker run "${DOCKER_FLAGS[@]}" \
+  --cap-drop=ALL \
+  --security-opt=no-new-privileges \
+  --user "$(id -u):$(id -g)" \
+  -e HOME=/home/claude-sandbox \
+  -v "$PWD:$PWD" \
+  -w "$PWD" \
+  -v "$HOME/.claude-sandbox:/home/claude/.claude" \
+  -v "$HOME/.claude-sandbox/.claude.json:/home/claude/.claude.json" \
+  claude-code-sandbox "$@"
