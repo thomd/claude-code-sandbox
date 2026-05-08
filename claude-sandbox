@@ -25,7 +25,8 @@ DOCKER_FLAGS=("--rm")
 [ -t 1 ] && DOCKER_FLAGS+=("-t")
 
 if [ -n "${PORTS:-}" ]; then
-  for port in $PORTS; do
+  IFS=' ' read -ra _ports <<<"$PORTS"
+  for port in "${_ports[@]}"; do
     if [[ ! "$port" =~ ^[0-9]+(:[0-9]+)?$ ]]; then
       die "PORTS entry '$port' is invalid; expected 'PORT' or 'HOST:CONTAINER' (digits only)."
     fi
@@ -47,7 +48,7 @@ exec docker run "${DOCKER_FLAGS[@]}" \
   --cap-drop=ALL \
   --security-opt=no-new-privileges \
   --user "$(id -u):$(id -g)" \
-  -e HOME=/home/claude-sandbox \
+  -e HOME=/home/claude \
   -v "$PWD:$PWD" \
   -w "$PWD" \
   -v "$HOME/.claude-sandbox:/home/claude/.claude" \
