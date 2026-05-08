@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BOLD=$'\e[1m'
 RED=$'\e[31m'
 RESET=$'\e[0m'
 [[ -t 1 ]] || {
-  BOLD=
   RED=
   RESET=
 }
@@ -20,6 +18,8 @@ mkdir -p "$HOME/.claude-sandbox"
 chmod 700 "$HOME/.claude-sandbox"
 chmod 600 "$HOME/.claude-sandbox/.claude.json"
 
+[[ "$PWD" != *" "* ]] || die "Current directory path contains a space; Docker volume mounts do not support spaces in paths."
+
 DOCKER_FLAGS=("--rm")
 [ -t 0 ] && DOCKER_FLAGS+=("-i")
 [ -t 1 ] && DOCKER_FLAGS+=("-t")
@@ -28,7 +28,7 @@ if [ -n "${PORTS:-}" ]; then
   IFS=' ' read -ra _ports <<<"$PORTS"
   for port in "${_ports[@]}"; do
     if [[ ! "$port" =~ ^[0-9]+(:[0-9]+)?$ ]]; then
-      die "PORTS entry '$port' is invalid; expected 'PORT' or 'HOST:CONTAINER' (digits only)."
+      die "PORTS entry '$port' is invalid; expected 'PORT' or 'HOST_PORT:CONTAINER_PORT' (digits only)."
     fi
     IFS=':' read -ra _port_parts <<<"$port"
     for _n in "${_port_parts[@]}"; do
