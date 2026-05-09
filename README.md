@@ -1,12 +1,5 @@
 # Claude Code Sandbox
 
-1. Makefile for install, uninstall and update
-1. install executable in ~/.local/bin
-1. install repo in ~/.local/share/claude-sandbox
-1. install config in ~/.local/state/claude-sandbox
-1. Enable native sandbox support by default
-1. add hooks for deterministic tooling
-
 > [!IMPORTANT]
 > This Claude Code Sandbox was only tested on MacOS - it might not run on your system.
 
@@ -14,7 +7,16 @@
 
 ```
 git clone https://github.com/thomd/claude-code-sandbox ~/.local/share/claude-sandbox
+cd ~/.local/share/claude-sandbox
 make install
 ```
 
 - override at build time with `--build-arg CLAUDE_CODE_VERSION=x.y.z`
+
+## TODO
+
+- [X] Makefile for install, uninstall and update
+- [X] install executable in ~/.local/bin
+- [X] install repo in ~/.local/share/claude-sandbox
+- [ ] Enable native sandbox support by default
+- [ ] add hooks for deterministic tooling
