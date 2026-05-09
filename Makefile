@@ -11,7 +11,7 @@ endif
 install:
 	docker build $(BUILD_ARGS) -t $(IMAGE) .
 	mkdir -p $(BINDIR)
-	install -m 755 claude-sandbox $(BINDIR)/claude-sandbox
+	ln -sf $(CURDIR)/claude-sandbox $(BINDIR)/claude-sandbox
 
 uninstall:
 	docker rmi $(IMAGE)
