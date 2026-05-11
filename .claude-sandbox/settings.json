@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(./**)"
+    ],
+    "deny": [
+      "Read(/**)",
+      "Read(~/**)"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "filesystem": {
+      "denyRead": [
+        "~/"
+      ],
+      "allowRead": [
+        "."
+      ]
+    }
+  },
+  "spinnerTipsEnabled": false,
+  "autoUpdatesChannel": "stable",
+  "preferredNotifChannel": "terminal_bell",
+  "autoUpdates": false
+}

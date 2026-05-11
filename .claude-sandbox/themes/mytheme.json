@@ -1,0 +1,27 @@
+{
+  "name": "mytheme",
+  "base": "dark-ansi",
+  "overrides": {
+    "promptBorder": "#333",
+    "bashBorder": "#ff0000",
+    "promptBorderShimmer": "rgb(256,1,1)",
+    "userMessageBackground": "rgb(20, 20, 20)",
+    "text": "#888",
+    "warning": "#ff0000",
+    "autoAccept": "#ff0000",
+    "error": "#222",
+    "inactive": "#444",
+    "subtle": "#333",
+    "claude": "#2dd4bf",
+    "claudeShimmer": "#5eead4",
+    "diffAdded": "#0c0c0c",
+    "diffRemoved": "#0c0c0c",
+    "diffAddedDimmed": "#0c0c0c",
+    "diffRemovedDimmed": "#0c0c0c",
+    "diffAddedWord": "#22cc22",
+    "diffRemovedWord": "#cc2222",
+    "permission": "#2d8a7a",
+    "claudeBlue_FOR_SYSTEM_SPINNER": "#2d8a7a",
+    "claudeBlueShimmer_FOR_SYSTEM_SPINNER": "#2d8a7a"
+  }
+}

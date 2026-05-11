@@ -11,6 +11,13 @@ cd ~/.local/share/claude-sandbox
 make install
 ```
 
+## Usage
+
+```
+alias cs='claude-sandbox claude --dangerously-skip-permissions'
+```
+
+
 - override at build time with `--build-arg CLAUDE_CODE_VERSION=x.y.z`
 
 ## TODO
