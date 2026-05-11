@@ -27,5 +27,18 @@
   "spinnerTipsEnabled": false,
   "autoUpdatesChannel": "stable",
   "preferredNotifChannel": "terminal_bell",
-  "autoUpdates": false
+  "autoUpdates": false,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-npm.sh"
+          }
+        ]
+      }
+    ]
+  }
 }
