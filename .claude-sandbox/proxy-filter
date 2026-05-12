@@ -1,5 +1,6 @@
 # Anthropic / Claude
 (^|\.)anthropic\.com$
+(^|\.)claude\.com$
 
 # GitHub
 (^|\.)github\.com$

@@ -23,7 +23,7 @@ ARG HOST_UID
 ARG HOST_GID
 RUN useradd -u ${HOST_UID} -g ${HOST_GID} -d /home/claude -s /bin/bash -M claude
 RUN mkdir -p /home/claude
-RUN chmod 750 /home/claude
+RUN chmod 777 /home/claude
 RUN echo 'alias l="ls -al"' >> /etc/bash.bashrc
 RUN echo 'alias ..="cd .."' >> /etc/bash.bashrc
 RUN echo 'PS1="claude: \w\$ "' >> /etc/bash.bashrc
