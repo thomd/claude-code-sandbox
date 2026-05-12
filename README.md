@@ -26,7 +26,14 @@ alias cs='claude-sandbox claude --dangerously-skip-permissions'
 - Mounts are minimal — no `~/.ssh`, `~/.aws`, or home directory beyond the claude config
 - `$PWD` is mounted with full read/write. Any secrets in the project (`.env`, hardcoded keys, etc.) are readable. This is unavoidable for a coding agent but important to be aware of.
 
-### Current Issues
+### Egress Filtering
 
-- No network restriction. The container has unrestricted outbound internet access. In yolo mode, an agent can exfiltrate files or call external APIs. Adding `--network none` (or a restricted bridge) would mitigate this, but would break agents that need to fetch packages or call APIs intentionally. This is a trade-off.
-- The `$CONFIG_DIR` mount contains the Claude API key. The agent can read its own credentials at `/home/claude/.claude`. In yolo mode it could use them to spawn further requests outside the container.
+Outbound traffic is filtered via [tinyproxy](https://tinyproxy.github.io/) running inside the container. Only domains on the allowlist can be reached.
+
+Customise the allowlist without rebuilding the image by editing `~/.config/claude-sandbox/proxy-filter`. Each line is an extended regex matched against the request hostname, for example:
+
+```
+(^|\.)example\.com$
+```
+
+Known limitation: Node.js's built-in `fetch()` bypasses proxy env vars, so the Claude Code process itself reaches `api.anthropic.com` directly. All shell-invoked tools are still filtered.

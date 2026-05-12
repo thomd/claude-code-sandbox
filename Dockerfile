@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     file \
     bubblewrap \
     socat \
+    tinyproxy \
     && rm -rf /var/lib/apt/lists/*
 
 ARG CLAUDE_CODE_VERSION=latest
@@ -27,4 +28,10 @@ RUN echo 'alias l="ls -al"' >> /etc/bash.bashrc
 RUN echo 'alias ..="cd .."' >> /etc/bash.bashrc
 RUN echo 'PS1="claude: \w\$ "' >> /etc/bash.bashrc
 
+COPY tinyproxy.conf /etc/tinyproxy/tinyproxy.conf
+COPY .claude-sandbox/proxy-filter /etc/tinyproxy/filter
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]

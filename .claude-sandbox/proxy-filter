@@ -1,0 +1,30 @@
+# Anthropic / Claude
+(^|\.)anthropic\.com$
+
+# GitHub
+(^|\.)github\.com$
+(^|\.)githubusercontent\.com$
+(^|\.)githubassets\.com$
+
+# npm / pnpm / yarn
+(^|\.)npmjs\.org$
+(^|\.)npmjs\.com$
+(^|\.)yarnpkg\.com$
+
+# Python
+(^|\.)pypi\.org$
+(^|\.)pythonhosted\.org$
+
+# Go
+(^|\.)golang\.org$
+(^|\.)pkg\.go\.dev$
+(^|\.)sum\.golang\.org$
+
+# Rust
+(^|\.)crates\.io$
+
+# Ruby
+(^|\.)rubygems\.org$
+
+# Debian packages
+(^|\.)debian\.org$

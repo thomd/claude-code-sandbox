@@ -45,6 +45,10 @@ if [ -n "${PORTS:-}" ]; then
   done
 fi
 
+if [ -f "$CONFIG_DIR/proxy-filter" ]; then
+  DOCKER_FLAGS+=("-v" "$CONFIG_DIR/proxy-filter:/etc/tinyproxy/filter:ro")
+fi
+
 exec docker run "${DOCKER_FLAGS[@]}" \
   --cap-drop=ALL \
   --security-opt=no-new-privileges \
