@@ -3,7 +3,9 @@ CLAUDE_CODE_VERSION ?= latest
 BINDIR := $(or $(XDG_BIN_HOME),$(HOME)/.local/bin)
 CONFIGDIR := $(or $(XDG_CONFIG_HOME),$(HOME)/.config)/claude-sandbox
 
-BUILD_ARGS := --build-arg CLAUDE_CODE_VERSION=$(CLAUDE_CODE_VERSION)
+BUILD_ARGS := --build-arg CLAUDE_CODE_VERSION=$(CLAUDE_CODE_VERSION) \
+              --build-arg HOST_UID=$(shell id -u) \
+              --build-arg HOST_GID=$(shell id -g)
 ifeq ($(CLAUDE_CODE_VERSION),latest)
   BUILD_ARGS += --build-arg CACHEBUST=$(shell date +%s)
 endif
