@@ -22,7 +22,7 @@ alias cs='claude-sandbox claude --dangerously-skip-permissions'
 To update `claude`, run
 
 ```
-make install
+make update
 ```
 
 ## On Security
