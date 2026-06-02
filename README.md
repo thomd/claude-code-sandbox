@@ -17,6 +17,14 @@ make install
 alias cs='claude-sandbox claude --dangerously-skip-permissions'
 ```
 
+## Update
+
+To update `claude`, run
+
+```
+make install
+```
+
 ## On Security
 
 - `--user "$(id -u):$(id -g)"` sets the actual process identity at runtime, overriding whatever the container's `/etc/passwd` says. Docker with `--user uid:gid` also doesn't load supplementary groups from the container's `/etc/group`.

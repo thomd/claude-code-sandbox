@@ -1,13 +1,8 @@
 {
   "model": "opusplan",
   "permissions": {
-    "allow": [
-      "Read(./**)"
-    ],
-    "deny": [
-      "Read(/**)",
-      "Read(~/**)"
-    ]
+    "allow": ["Read(./**)"],
+    "deny": ["Read(/**)", "Read(~/**)"]
   },
   "statusLine": {
     "type": "command",
@@ -17,16 +12,11 @@
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
     "filesystem": {
-      "denyRead": [
-        "~/"
-      ],
-      "allowRead": [
-        "."
-      ]
+      "denyRead": ["~/"],
+      "allowRead": ["."]
     }
   },
   "spinnerTipsEnabled": false,
-  "autoUpdatesChannel": "stable",
   "preferredNotifChannel": "terminal_bell",
   "autoUpdates": false,
   "hooks": {

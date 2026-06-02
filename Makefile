@@ -16,7 +16,10 @@ install:
 	mkdir -p $(BINDIR)
 	ln -sf $(CURDIR)/claude-sandbox $(BINDIR)/claude-sandbox
 	mkdir -p $(CONFIGDIR)
-	cp -rn .claude-sandbox/. $(CONFIGDIR)/
+	rsync -a --ignore-existing .claude-sandbox/ $(CONFIGDIR)/
+
+update:
+	docker build $(BUILD_ARGS) -t $(IMAGE) .
 
 uninstall:
 	docker rmi $(IMAGE)
