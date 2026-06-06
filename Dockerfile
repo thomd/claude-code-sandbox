@@ -19,6 +19,8 @@ ARG CLAUDE_CODE_VERSION=latest
 ARG FORCE_INSTALL=1
 RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}
 
+ENV CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1
+
 ARG HOST_UID
 ARG HOST_GID
 RUN useradd -u ${HOST_UID} -g ${HOST_GID} -d /home/claude -s /bin/bash -M claude
