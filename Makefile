@@ -22,6 +22,6 @@ update:
 	docker build $(BUILD_ARGS) -t $(IMAGE) .
 
 uninstall:
-	docker rmi $(IMAGE)
+	if docker image inspect $(IMAGE) >/dev/null 2>&1; then docker rmi $(IMAGE); fi
 	rm -f $(BINDIR)/claude-sandbox
 	rm -rf $(CONFIGDIR)
